@@ -7,7 +7,7 @@ HEIGHT = 16.;               // [5:40]
 WALL_THICKNESS = 1.;        // [0.2:10]
 
 // diameter of the seat tube in mm
-SEAT_TUBE_DIAMETER = 26.5;   // [20:40]
+SEAT_TUBE_DIAMETER = 27.5;   // [20:40]
 
 // angle of your seat tube to mount the light horizontal (in degrees)
 SEAT_TUBE_ANGLE = 10.;      // [0:45]
@@ -36,7 +36,7 @@ LIGHT_DIST = LIGHTSCREW_INSET + LIGHT_INSET + WALL_THICKNESS - WALL_THICKNESS;  
 /* [Back - screws and nuts] */
 
 // gap, used for tightening with screws (in mm)
-GAP = 9.;                 // [2:15]
+GAP = 7.;                 // [2:15]
 
 // with of backside of bike light mount (in mm)
 GAPBOX_WIDTH = HEIGHT;
@@ -54,13 +54,13 @@ SCREW_DIAMETER = 3.2;       // [1:8]
 SCREW_HEAD_DIAMETER = 6.3;   // [1:12]
 
 // TODO
-SCREW_HEAD_INSET = 2.8;      // [1:12]
+SCREW_HEAD_INSET = 3.8;      // [1:12]
 
 // diameter of nut in mm (about 6mm for M3)
 NUT_DIAMETER = 6.3;          // [1:12]
 
 // height of nut in mm (usually about 2mm for M3)
-NUT_INSET = 2.8;             // [1:12]
+NUT_INSET = 3.8;             // [1:12]
 
 
 
@@ -70,7 +70,7 @@ $fn=200;
 
 
 bikelight_mount();
-%seattube();  // will not be printed
+/*%seattube();  // will not be printed*/
 
 
 
@@ -119,7 +119,7 @@ module base() {
 module lightscrew() {
     translate([0., -WALL_THICKNESS-LIGHT_DIST-SEAT_TUBE_DIAMETER/2., 0.])
         rotate([90., 0., 0.])
-            cylinder(d=LIGHTDIAMETER, h=2*LIGHT_INSET, center=true);
+            #cylinder(d=LIGHTDIAMETER, h=2*LIGHT_INSET, center=true);
     translate([0., -SEAT_TUBE_DIAMETER/2., 0.])
         rotate([90., 0., 0.])
             cylinder(d=LIGHTSCREW_HEAD_DIAMETER, h=2*LIGHTSCREW_INSET, center=true);
