@@ -4,10 +4,10 @@
 HEIGHT = 16.;               // [5:40]
 
 // thickness of thinest part of the wall in mm
-WALL_THICKNESS = 2.;        // [0.2:10]
+WALL_THICKNESS = 1.;        // [0.2:10]
 
 // diameter of the seat tube in mm
-SEAT_TUBE_DIAMETER = 26.;   // [20:40]
+SEAT_TUBE_DIAMETER = 26.5;   // [20:40]
 
 // angle of your seat tube to mount the light horizontal (in degrees)
 SEAT_TUBE_ANGLE = 10.;      // [0:45]
@@ -16,52 +16,52 @@ SEAT_TUBE_ANGLE = 10.;      // [0:45]
 /* [Front - light] */
 
 // TODO
-LIGHT_DIST = 3.;   // [0:28]
+LIGHT_DIST = 4.3;   // [0:28]
 
 // TODO
-LIGHTSCREW_DIAMETER = 5.;   // [1:18]
+LIGHTSCREW_DIAMETER = 5.2;   // [1:18]
 
 // diameter of head of screw, which is screwed to light (in mm)
-LIGHTSCREW_HEAD_DIAMETER = 9.;   // [1:18]
+LIGHTSCREW_HEAD_DIAMETER = 9.5;   // [1:18]
 
 // height of head of screw for light (in mm)
-LIGHTSCREW_INSET = 2.;   // [0:12]
+LIGHTSCREW_INSET = 2.3;   // [0:12]
 
 // diameter of bottom of light (in mm)
 LIGHTDIAMETER = 10.7;    // [1:25]
 
 // height of bottom of light (in mm)
-LIGHT_INSET = 1.5;        // [0:12]
+LIGHT_INSET = 2.7;        // [0:12]
 
 
 /* [Back - screws and nuts] */
 
 // gap, used for tightening with screws (in mm)
-GAP = 5.;                 // [2:15]
+GAP = 9.;                 // [2:15]
 
 // with of backside of bike light mount (in mm)
 GAPBOX_WIDTH = HEIGHT;
 
 // distance
-SCREW_DIST = 5.;          // [1:15]
+SCREW_DIST = 4.6;          // [1:15]
 
 // how much screw holes are moved up and down from center (in mm)
 SCREW_Z_OFFSET = 0.25 * HEIGHT;   // [0:15]
 
 // TODO
-SCREW_DIAMETER = 3;       // [1:8]
+SCREW_DIAMETER = 3.2;       // [1:8]
 
 // TODO
-SCREW_HEAD_DIAMETER = 4;   // [1:12]
+SCREW_HEAD_DIAMETER = 6.3;   // [1:12]
 
 // TODO
-SCREW_HEAD_INSET = 3;      // [1:12]
+SCREW_HEAD_INSET = 2.8;      // [1:12]
 
 // diameter of nut in mm (about 6mm for M3)
-NUT_DIAMETER = 6.;         // [1:12]
+NUT_DIAMETER = 6.3;          // [1:12]
 
 // height of nut in mm (usually about 2mm for M3)
-NUT_INSET = 2.5;           // [1:12]
+NUT_INSET = 2.8;             // [1:12]
 
 
 
