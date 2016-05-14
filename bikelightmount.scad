@@ -16,9 +16,6 @@ SEAT_TUBE_ANGLE = 10.;      // [0:45]
 /* [Front - light] */
 
 // TODO
-LIGHT_DIST = 4.3;   // [0:28]
-
-// TODO
 LIGHTSCREW_DIAMETER = 5.2;   // [1:18]
 
 // diameter of head of screw, which is screwed to light (in mm)
@@ -33,6 +30,8 @@ LIGHTDIAMETER = 10.75;    // [1:25]
 // height of bottom of light (in mm)
 LIGHT_INSET = 2.7;        // [0:12]
 
+// TODO
+LIGHT_DIST = LIGHTSCREW_INSET + LIGHT_INSET + WALL_THICKNESS - WALL_THICKNESS;   // [0:28]
 
 /* [Back - screws and nuts] */
 
@@ -114,8 +113,8 @@ module base() {
 
 
 /**
- * Screw for mounting the light (screwed in light). Object used subtracting,
- * i.e. making the hole for the screw.
+ * Screw for mounting the light (screwed in light) and light bottom. Object
+ * used subtracting, i.e. making the hole for the screw.
  */
 module lightscrew() {
     translate([0., -WALL_THICKNESS-LIGHT_DIST-SEAT_TUBE_DIAMETER/2., 0.])
