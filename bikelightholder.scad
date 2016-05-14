@@ -27,8 +27,8 @@ LIGHTSCREW_HEAD_DIAMETER = 9.5;   // [1:18]
 // height of head of screw for light (in mm)
 LIGHTSCREW_INSET = 2.3;   // [0:12]
 
-// diameter of bottom of light (in mm)
-LIGHTDIAMETER = 10.7;    // [1:25]
+// diameter of bottom of light (in mm), other version with 8.8mm
+LIGHTDIAMETER = 10.75;    // [1:25]
 
 // height of bottom of light (in mm)
 LIGHT_INSET = 2.7;        // [0:12]
