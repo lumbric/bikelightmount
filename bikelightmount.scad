@@ -7,7 +7,7 @@ HEIGHT = 16.;               // [5:40]
 WALL_THICKNESS = 1.;        // [0.2:10]
 
 // diameter of the seat tube in mm
-SEAT_TUBE_DIAMETER = 27.5;   // [20:40]
+SEAT_TUBE_DIAMETER = 26.5;   // [20:40]
 
 // angle of your seat tube to mount the light horizontal (in degrees)
 SEAT_TUBE_ANGLE = 10.;      // [0:45]
@@ -42,7 +42,7 @@ GAP = 7.;                 // [2:15]
 GAPBOX_WIDTH = HEIGHT;
 
 // distance
-SCREW_DIST = 4.6;          // [1:15]
+SCREW_DIST = 4.9;          // [1:15]
 
 // how much screw holes are moved up and down from center (in mm)
 SCREW_Z_OFFSET = 0.25 * HEIGHT;   // [0:15]
@@ -51,16 +51,17 @@ SCREW_Z_OFFSET = 0.25 * HEIGHT;   // [0:15]
 SCREW_DIAMETER = 3.2;       // [1:8]
 
 // TODO
-SCREW_HEAD_DIAMETER = 6.3;   // [1:12]
+SCREW_HEAD_DIAMETER = 6.4;   // [1:12]
 
-// TODO
-SCREW_HEAD_INSET = 3.8;      // [1:12]
+// TODO SCREW_HEAD_INSET + WALL_THICKNESS >= (GAPBOX_WIDTH - GAP)/2.
+SCREW_HEAD_INSET = 2.;      // [1:12]
 
 // diameter of nut in mm (about 6mm for M3)
-NUT_DIAMETER = 6.3;          // [1:12]
+NUT_DIAMETER = 6.4;          // [1:12]
 
 // height of nut in mm (usually about 2mm for M3)
-NUT_INSET = 3.8;             // [1:12]
+// TODO NUT_INSET + WALL_THICKNESS >= (GAPBOX_WIDTH - GAP)/2.
+NUT_INSET = 2.;             // [1:12]
 
 
 
@@ -119,7 +120,7 @@ module base() {
 module lightscrew() {
     translate([0., -WALL_THICKNESS-LIGHT_DIST-SEAT_TUBE_DIAMETER/2., 0.])
         rotate([90., 0., 0.])
-            #cylinder(d=LIGHTDIAMETER, h=2*LIGHT_INSET, center=true);
+            cylinder(d=LIGHTDIAMETER, h=2*LIGHT_INSET, center=true);
     translate([0., -SEAT_TUBE_DIAMETER/2., 0.])
         rotate([90., 0., 0.])
             cylinder(d=LIGHTSCREW_HEAD_DIAMETER, h=2*LIGHTSCREW_INSET, center=true);
@@ -159,12 +160,12 @@ module screw() {
         rotate([0., 90., 0.])
             cylinder(d=SCREW_DIAMETER, h=SEAT_TUBE_DIAMETER, center=true);
 
-        translate([GAPBOX_WIDTH/2. + SCREW_HEAD_INSET, 0., 0.])
+        translate([GAPBOX_WIDTH - SCREW_HEAD_INSET, 0., 0.])
             rotate([0., 90., 0.])
-                cylinder(d=SCREW_HEAD_DIAMETER, h=2*SCREW_HEAD_INSET, center=true);
+                cylinder(d=SCREW_HEAD_DIAMETER, h=GAPBOX_WIDTH, center=true);
 
-        translate([-(GAPBOX_WIDTH/2. + NUT_INSET), 0., 0.])
+        translate([-GAPBOX_WIDTH + NUT_INSET, 0., 0.])
             rotate([0., 90., 0.])
-                cylinder(d=NUT_DIAMETER, h=2*NUT_INSET, center=true, $fn=6);
+                cylinder(d=NUT_DIAMETER, h=GAPBOX_WIDTH, center=true, $fn=6);
     }
 }
