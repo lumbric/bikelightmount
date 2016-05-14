@@ -1,33 +1,83 @@
-HEIGHT = 16;
-WALL_THICKNESS = 2;
+/* [General] */
 
-SEAT_TUBE_DIAMETER = 26;
-SEAT_TUBE_ANGLE = 10.;
+// height in mm
+HEIGHT = 16.;               // [5:40]
 
-GAP = 5;
+// thickness of thinest part of the wall in mm
+WALL_THICKNESS = 2.;        // [0.2:10]
+
+// diameter of the seat tube in mm
+SEAT_TUBE_DIAMETER = 26.;   // [20:40]
+
+// angle of your seat tube to mount the light horizontal (in degrees)
+SEAT_TUBE_ANGLE = 10.;      // [0:45]
+
+
+/* [Front - light] */
+
+// TODO
+LIGHT_DIST = 3.;   // [0:28]
+
+// TODO
+LIGHTSCREW_DIAMETER = 5.;   // [1:18]
+
+// diameter of head of screw, which is screwed to light (in mm)
+LIGHTSCREW_HEAD_DIAMETER = 9.;   // [1:18]
+
+// height of head of screw for light (in mm)
+LIGHTSCREW_INSET = 2.;   // [0:12]
+
+// diameter of bottom of light (in mm)
+LIGHTDIAMETER = 10.7;    // [1:25]
+
+// height of bottom of light (in mm)
+LIGHT_INSET = 1.5;        // [0:12]
+
+
+/* [Back - screws and nuts] */
+
+// gap, used for tightening with screws (in mm)
+GAP = 5.;                 // [2:15]
+
+// with of backside of bike light mount (in mm)
 GAPBOX_WIDTH = HEIGHT;
-SCREW_DIST = 5;
-LIGHT_DIST = 3;
 
-LIGHTSCREW_DIAMETER = 5;
-LIGHTSCREW_HEAD_DIAMETER = 9;
-LIGHTSCREW_INSET = 2.;
+// distance
+SCREW_DIST = 5.;          // [1:15]
 
-LIGHTDIAMETER = 10.7;
-LIGHT_INSET = 1.5;
+// how much screw holes are moved up and down from center (in mm)
+SCREW_Z_OFFSET = 0.25 * HEIGHT;   // [0:15]
 
-SCREW_Z_OFFSET = 0.25 * HEIGHT;
-SCREW_DIAMETER = 3;
-SCREW_HEAD_DIAMETER = 4;
-SCREW_HEAD_INSET = 3;
-NUT_DIAMETER = 6;
-NUT_INSET = 2.5;
+// TODO
+SCREW_DIAMETER = 3;       // [1:8]
 
-$fn=100;
+// TODO
+SCREW_HEAD_DIAMETER = 4;   // [1:12]
+
+// TODO
+SCREW_HEAD_INSET = 3;      // [1:12]
+
+// diameter of nut in mm (about 6mm for M3)
+NUT_DIAMETER = 6.;         // [1:12]
+
+// height of nut in mm (usually about 2mm for M3)
+NUT_INSET = 2.5;           // [1:12]
+
+
+
+/* [Hidden] */
+
+$fn=200;
+
 
 bikelight_mount();
+%seattube();  // will not be printed
 
 
+
+/**
+ * Bike light mount. This is what you want to print.
+ */
 module bikelight_mount() {
     difference() {
         base();
@@ -63,6 +113,10 @@ module base() {
 }
 
 
+/**
+ * Screw for mounting the light (screwed in light). Object used subtracting,
+ * i.e. making the hole for the screw.
+ */
 module lightscrew() {
     translate([0., -WALL_THICKNESS-LIGHT_DIST-SEAT_TUBE_DIAMETER/2., 0.])
         rotate([90., 0., 0.])
@@ -89,6 +143,9 @@ module seattube() {
 }
 
 
+/**
+ * Screws and nuts.
+ */
 module screws() {
     screw();
     mirror([0., 0., 1.])
@@ -98,7 +155,7 @@ module screws() {
 
 module screw() {
     translate([0.,
-            WALL_THICKNESS/2. + SCREW_DIST/2. + SEAT_TUBE_DIAMETER/2.,
+            SCREW_DIST/2. + SEAT_TUBE_DIAMETER/2.,
             SCREW_Z_OFFSET]) {
         rotate([0., 90., 0.])
             cylinder(d=SCREW_DIAMETER, h=SEAT_TUBE_DIAMETER, center=true);
