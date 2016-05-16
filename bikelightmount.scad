@@ -1,3 +1,33 @@
+/* Bike light mount
+ *
+ * https://github.com/lumbric/bikelightmount
+ * http://www.thingiverse.com/thing:1566371
+ *
+ * This is a costumizeable bike light holder inspired by the
+ * [31.6mm bike light holder](http://www.thingiverse.com/thing:1487051). My
+ * seat tube is too thin, so I redesigned it in OpenScad and made it
+ * costumizeable.
+ *
+ * You need:
+ *   - 2 M3 nuts
+ *   - 2 screws, ~16-20mm lenght
+ *   - aluminum LED bike light
+ *
+ * These aluminum LED bike lights are very wide spread and very cheap. Just
+ * search on ebay or aliexpress. They are powered by 2x CR2032 batteries
+ * lasting for quite a while if you use them in flashing mode. They are also
+ * bright enough for the rear light, but I would not recommend them for your
+ * front light. Note that sizes very a bit, you might need to adapt the
+ * parameters LIGHTDIAMETER and LIGHT_INSET. There are also USB chargeable
+ * ones out there, but I don't have one to try if the model fits.
+ *
+ *
+ * This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+ * International License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by-sa/4.0/.
+ *
+ */
+
 /* [General] */
 
 // height in mm
