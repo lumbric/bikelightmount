@@ -30,11 +30,26 @@
 
 /* [General] */
 
+
+BIKELIGHT_DIAMETER = 29;
+BIKELIGHT_LENGTH= 33;
+
+NECK_DIAMETER = 11;
+NECK_LENGTH = 2.5;
+
+BOTTOM_DIAMETER = 16.5;
+BOTTOM_LENGTH = 1.2;
+
+BIKELIGHT_OFFSET = 3;
+
 // height in mm
-HEIGHT = 16.;               // [5:40]
+HEIGHT = BIKELIGHT_DIAMETER;               // [5:40]
+
+// how much gap additional to calculate
+WALL_DELTA = 0.3;
 
 // thickness of thinest part of the wall in mm
-WALL_THICKNESS = 1.;        // [0.2:10]
+WALL_THICKNESS = 2.;        // [0.2:10]
 
 // diameter of the seat tube in mm
 SEAT_TUBE_DIAMETER = 26.5;   // [20:40]
@@ -46,10 +61,10 @@ SEAT_TUBE_ANGLE = 10.;      // [0:45]
 /* [Front - light] */
 
 // diameter of screw, which is screwed to light (in mm)
-LIGHTSCREW_DIAMETER = 5.2;   // [1:18]
+LIGHTSCREW_DIAMETER = 11.;   // [1:18]
 
 // diameter of head of screw, which is screwed to light (in mm)
-LIGHTSCREW_HEAD_DIAMETER = 9.5;   // [1:18]
+LIGHTSCREW_HEAD_DIAMETER = 17.;   // [1:18]
 
 // height of head of screw for light (in mm)
 LIGHTSCREW_INSET = 2.3;   // [0:12]
@@ -64,10 +79,7 @@ LIGHT_INSET = 2.7;        // [0:12]
 /* [Back - screws and nuts] */
 
 // gap, used for tightening with screws (in mm)
-GAP = 7.;                 // [2:15]
-
-// with of backside of bike light mount (in mm)
-GAPBOX_WIDTH = HEIGHT;
+GAP = 1.;                 // [2:15]
 
 // distance from edge to seat tube + WALL_THICKNESS on backside (in mm)
 SCREW_DIST = 4.9;          // [1:15]
@@ -84,12 +96,6 @@ SCREW_HEAD_DIAMETER = 6.4;   // [1:12]
 // height of screw head (in mm), use less than SCREW_HEAD_INSET <= (GAPBOX_WIDTH - GAP)/2. - WALL_THICKNESS
 SCREW_HEAD_INSET = 2.;      // [1:12]
 
-// diameter of nut in mm (about 6mm for M3)
-NUT_DIAMETER = 6.4;          // [1:12]
-
-// height of nut in mm (usually about 2mm for M3), use less then NUT_INSET <= (GAPBOX_WIDTH - GAP)/2. - WALL_THICKNESS
-NUT_INSET = 2.;             // [1:12]
-
 
 
 /* [Hidden] */
@@ -101,13 +107,33 @@ wall_thickness_lightscrew = WALL_THICKNESS;
 // distance of
 light_dist = LIGHTSCREW_INSET + LIGHT_INSET + wall_thickness_lightscrew - WALL_THICKNESS;
 
-$fn=200;
+$fn=150;
 
 
 
 bikelight_mount();
-/*%seattube();  // will not be printed*/
+//%seattube();  // will not be printed
+%bikelight();
+//screws();
 
+
+module screws() {
+    screw();
+    //mirror([0., 0., 1.]) {
+        //screw();
+    //}
+}
+
+module screw() {
+    rotate([0., 90., 0.]) {
+        translate([HEIGHT * 0.23 , 1.8 -SEAT_TUBE_DIAMETER/2. - BIKELIGHT_OFFSET/2. - WALL_THICKNESS/2., 0.]) {
+            translate([0., 0.,  -0.6*SEAT_TUBE_DIAMETER])
+                cylinder(d=SCREW_DIAMETER, h=SEAT_TUBE_DIAMETER);
+            translate([0., 0.,  -1.4 * SEAT_TUBE_DIAMETER])
+                cylinder(d=SCREW_HEAD_DIAMETER, h=SEAT_TUBE_DIAMETER);
+        }
+    }
+}
 
 
 /**
@@ -117,10 +143,10 @@ module bikelight_mount() {
     difference() {
         base();
         seattube();
-        gap();
 
+        bikelight(delta=WALL_DELTA);
+        gap();
         screws();
-        lightscrew();
     }
 }
 
@@ -139,35 +165,32 @@ module base() {
                         d=SEAT_TUBE_DIAMETER + 2*WALL_THICKNESS,
                         center=true);
         }
-        translate([0., WALL_THICKNESS + SEAT_TUBE_DIAMETER/2., 0.])
-            cube([HEIGHT, 2*SCREW_DIST, HEIGHT], center=true);
 
-        translate([0., -WALL_THICKNESS -SEAT_TUBE_DIAMETER/2., 0.])
-            cube([GAPBOX_WIDTH, 2*light_dist, HEIGHT], center=true);
+        translate([0., -SEAT_TUBE_DIAMETER/2. - BIKELIGHT_OFFSET, 0.])
+            rotate([90., 0., 0.])
+                cylinder(d=0.95* BIKELIGHT_DIAMETER, h=BIKELIGHT_OFFSET + WALL_THICKNESS);
     }
 }
 
 
-/**
- * Screw for mounting the light (screwed in light) and light bottom. Object
- * used subtracting, i.e. making the hole for the screw.
- */
-module lightscrew() {
-    translate([0., -WALL_THICKNESS-light_dist-SEAT_TUBE_DIAMETER/2., 0.])
-        rotate([90., 0., 0.])
-            cylinder(d=LIGHTDIAMETER, h=2*LIGHT_INSET, center=true);
-    translate([0., -SEAT_TUBE_DIAMETER/2., 0.])
-        rotate([90., 0., 0.])
-            cylinder(d=LIGHTSCREW_HEAD_DIAMETER, h=2*LIGHTSCREW_INSET, center=true);
-    translate([0., -SEAT_TUBE_DIAMETER/2., 0.])
-        rotate([90., 0., 0.])
-            cylinder(d=LIGHTSCREW_DIAMETER, h=SEAT_TUBE_DIAMETER, center=true);
+module gap() {
+    translate([0., -SEAT_TUBE_DIAMETER, 0.])
+        cube([GAP, SEAT_TUBE_DIAMETER*2, 2*HEIGHT], center=true);
 }
 
 
-module gap() {
-    translate([0., SEAT_TUBE_DIAMETER/2., 0.])
-        cube([GAP, SEAT_TUBE_DIAMETER, 3*HEIGHT], center=true);
+module bikelight(delta=0.) {
+    // not meant to be printed, just for nicer visualisation
+    translate([0., -SEAT_TUBE_DIAMETER/2. - BIKELIGHT_OFFSET, 0.]) {
+        rotate([0., 90., -90.]) {
+            translate([0., 0., -delta])
+                cylinder(d=BOTTOM_DIAMETER + 2*delta, h=BOTTOM_LENGTH + 2*delta);
+            translate([0., 0., BOTTOM_LENGTH+delta - BOTTOM_LENGTH/2.])
+                cylinder(d=NECK_DIAMETER + 2*delta, h=2*NECK_LENGTH - BOTTOM_LENGTH/2. + 2*delta);
+            translate([0., 0., BOTTOM_LENGTH + NECK_LENGTH - delta])
+                cylinder(d=BIKELIGHT_DIAMETER + 2*delta, h=BIKELIGHT_LENGTH);
+        }
+    }
 }
 
 
@@ -178,29 +201,3 @@ module seattube() {
 }
 
 
-/**
- * Screws and nuts.
- */
-module screws() {
-    screw();
-    mirror([0., 0., 1.])
-        screw();
-}
-
-
-module screw() {
-    translate([0.,
-            SCREW_DIST/2. + SEAT_TUBE_DIAMETER/2.,
-            SCREW_Z_OFFSET]) {
-        rotate([0., 90., 0.])
-            cylinder(d=SCREW_DIAMETER, h=SEAT_TUBE_DIAMETER, center=true);
-
-        translate([GAPBOX_WIDTH - SCREW_HEAD_INSET, 0., 0.])
-            rotate([0., 90., 0.])
-                cylinder(d=SCREW_HEAD_DIAMETER, h=GAPBOX_WIDTH, center=true);
-
-        translate([-GAPBOX_WIDTH + NUT_INSET, 0., 0.])
-            rotate([0., 90., 0.])
-                cylinder(d=NUT_DIAMETER, h=GAPBOX_WIDTH, center=true, $fn=6);
-    }
-}
