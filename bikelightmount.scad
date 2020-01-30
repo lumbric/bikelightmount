@@ -18,9 +18,7 @@
  * lasting for quite a while if you use them in flashing mode. They are also
  * bright enough for the rear light, but I would not recommend them for your
  * front light. Note that sizes very a bit, you might need to adapt the
- * parameters LIGHTDIAMETER and LIGHT_INSET. There are also USB chargeable
- * ones out there, but I don't have one to try if the model fits.
- *
+ * parameters LIGHTDIAMETER.
  *
  * This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
  * International License. To view a copy of this license, visit
@@ -31,7 +29,7 @@
 /* [General] */
 
 
-BIKELIGHT_DIAMETER = 29;
+BIKELIGHT_DIAMETER = 25.5;
 BIKELIGHT_LENGTH= 33;
 
 NECK_DIAMETER = 11;
@@ -40,7 +38,7 @@ NECK_LENGTH = 2.5;
 BOTTOM_DIAMETER = 16.5;
 BOTTOM_LENGTH = 1.2;
 
-BIKELIGHT_OFFSET = 3;
+BIKELIGHT_OFFSET = 2.9;
 
 // height in mm
 HEIGHT = BIKELIGHT_DIAMETER;               // [5:40]
@@ -49,49 +47,27 @@ HEIGHT = BIKELIGHT_DIAMETER;               // [5:40]
 WALL_DELTA = 0.3;
 
 // thickness of thinest part of the wall in mm
-WALL_THICKNESS = 2.;        // [0.2:10]
+WALL_THICKNESS = 1.0;        // [0.2:10]
 
 // diameter of the seat tube in mm
-SEAT_TUBE_DIAMETER = 26.5;   // [20:40]
+SEAT_TUBE_DIAMETER = 25.1;   // [20:40]
 
 // angle of your seat tube to mount the light horizontal (in degrees)
-SEAT_TUBE_ANGLE = 10.;      // [0:45]
+SEAT_TUBE_ANGLE = 1.;      // [0:45]
 
-
-/* [Front - light] */
-
-// diameter of screw, which is screwed to light (in mm)
-LIGHTSCREW_DIAMETER = 11.;   // [1:18]
-
-// diameter of head of screw, which is screwed to light (in mm)
-LIGHTSCREW_HEAD_DIAMETER = 17.;   // [1:18]
-
-// height of head of screw for light (in mm)
-LIGHTSCREW_INSET = 2.3;   // [0:12]
-
-// diameter of bottom of light (in mm), other version with 8.8mm
-LIGHTDIAMETER = 10.75;    // [1:25]
-
-// height of bottom of light (in mm)
-LIGHT_INSET = 2.7;        // [0:12]
 
 
 /* [Back - screws and nuts] */
 
 // gap, used for tightening with screws (in mm)
-GAP = 1.;                 // [2:15]
+GAP = 2.;                 // [2:15]
 
-// distance from edge to seat tube + WALL_THICKNESS on backside (in mm)
-SCREW_DIST = 4.9;          // [1:15]
-
-// how much screw holes are moved up and down from center (in mm)
-SCREW_Z_OFFSET = 0.25 * HEIGHT;   // [0:15]
 
 // diameter of screws used to fix bikelightmount (in mm)
-SCREW_DIAMETER = 3.2;       // [1:8]
+SCREW_DIAMETER = 2.;       // [1:8]
 
 // diameter of head of both screws used to fix bikelightmount (in mm)
-SCREW_HEAD_DIAMETER = 6.4;   // [1:12]
+SCREW_HEAD_DIAMETER = 4.;   // [1:12]
 
 // height of screw head (in mm), use less than SCREW_HEAD_INSET <= (GAPBOX_WIDTH - GAP)/2. - WALL_THICKNESS
 SCREW_HEAD_INSET = 2.;      // [1:12]
@@ -104,8 +80,6 @@ SCREW_HEAD_INSET = 2.;      // [1:12]
 // thickness of wall separating light and screw head
 wall_thickness_lightscrew = WALL_THICKNESS;
 
-// distance of
-light_dist = LIGHTSCREW_INSET + LIGHT_INSET + wall_thickness_lightscrew - WALL_THICKNESS;
 
 $fn=150;
 
@@ -126,7 +100,7 @@ module screws() {
 
 module screw() {
     rotate([0., 90., 0.]) {
-        translate([HEIGHT * 0.23 , 1.8 -SEAT_TUBE_DIAMETER/2. - BIKELIGHT_OFFSET/2. - WALL_THICKNESS/2., 0.]) {
+        translate([HEIGHT * 0.23 , 0.7 -SEAT_TUBE_DIAMETER/2. - BIKELIGHT_OFFSET/2. - WALL_THICKNESS/2., 0.]) {
             translate([0., 0.,  -0.6*SEAT_TUBE_DIAMETER])
                 cylinder(d=SCREW_DIAMETER, h=SEAT_TUBE_DIAMETER);
             translate([0., 0.,  -1.4 * SEAT_TUBE_DIAMETER])
