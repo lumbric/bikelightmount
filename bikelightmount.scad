@@ -50,10 +50,10 @@ WALL_DELTA = 0.3;
 WALL_THICKNESS = 1.0;        // [0.2:10]
 
 // diameter of the seat tube in mm
-SEAT_TUBE_DIAMETER = 25.1;   // [20:40]
+SEAT_TUBE_DIAMETER = 27.5;   // [20:40]
 
 // angle of your seat tube to mount the light horizontal (in degrees)
-SEAT_TUBE_ANGLE = 1.;      // [0:45]
+SEAT_TUBE_ANGLE = 10.;      // [0:45]
 
 
 
