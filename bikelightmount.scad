@@ -50,7 +50,7 @@ WALL_DELTA = 0.3;
 WALL_THICKNESS = 1.0;        // [0.2:10]
 
 // diameter of the seat tube in mm
-SEAT_TUBE_DIAMETER = 27.5;   // [20:40]
+SEAT_TUBE_DIAMETER = 28.;   // [20:40]
 
 // angle of your seat tube to mount the light horizontal (in degrees)
 SEAT_TUBE_ANGLE = 10.;      // [0:45]
@@ -60,17 +60,17 @@ SEAT_TUBE_ANGLE = 10.;      // [0:45]
 /* [Back - screws and nuts] */
 
 // gap, used for tightening with screws (in mm)
-GAP = 2.;                 // [2:15]
+GAP = 1.5;                 // [2:15]
 
 
 // diameter of screws used to fix bikelightmount (in mm)
-SCREW_DIAMETER = 2.;       // [1:8]
+SCREW_DIAMETER = 2.4;       // [1:8]
 
 // diameter of head of both screws used to fix bikelightmount (in mm)
-SCREW_HEAD_DIAMETER = 4.;   // [1:12]
+SCREW_HEAD_DIAMETER = 7.;   // [1:12]
 
 // height of screw head (in mm), use less than SCREW_HEAD_INSET <= (BIKELIGHT_DIAMETER  - GAP)/2. - WALL_THICKNESS
-SCREW_HEAD_INSET = 2.;      // [1:12]
+SCREW_HEAD_INSET = 4;       // [1:12]
 
 
 
