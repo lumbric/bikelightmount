@@ -69,7 +69,7 @@ SCREW_DIAMETER = 2.;       // [1:8]
 // diameter of head of both screws used to fix bikelightmount (in mm)
 SCREW_HEAD_DIAMETER = 4.;   // [1:12]
 
-// height of screw head (in mm), use less than SCREW_HEAD_INSET <= (GAPBOX_WIDTH - GAP)/2. - WALL_THICKNESS
+// height of screw head (in mm), use less than SCREW_HEAD_INSET <= (BIKELIGHT_DIAMETER  - GAP)/2. - WALL_THICKNESS
 SCREW_HEAD_INSET = 2.;      // [1:12]
 
 
@@ -103,8 +103,8 @@ module screw() {
         translate([HEIGHT * 0.23 , 0.7 -SEAT_TUBE_DIAMETER/2. - BIKELIGHT_OFFSET/2. - WALL_THICKNESS/2., 0.]) {
             translate([0., 0.,  -0.6*SEAT_TUBE_DIAMETER])
                 cylinder(d=SCREW_DIAMETER, h=SEAT_TUBE_DIAMETER);
-            translate([0., 0.,  -1.4 * SEAT_TUBE_DIAMETER])
-                cylinder(d=SCREW_HEAD_DIAMETER, h=SEAT_TUBE_DIAMETER);
+            translate([0., 0.,  -1.5 * BIKELIGHT_DIAMETER + SCREW_HEAD_INSET])
+                cylinder(d=SCREW_HEAD_DIAMETER, h=BIKELIGHT_DIAMETER);
         }
     }
 }
